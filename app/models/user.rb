@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :email, :name, :password, presence: true
   validates :email, :name, uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 8 }
+
+  has_many :decks, dependent: :destroy
 end
