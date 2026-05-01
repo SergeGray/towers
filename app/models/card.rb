@@ -9,9 +9,9 @@ class Card < ApplicationRecord
                    merchants_guild: 5,
                    pirates: 6 }
 
-  validates :name, :description, :strength, presence: true
-  validates :strength, numericality: { greater_than_or_equal_to: 0 }
-
   has_many :deck_cards, dependent: :destroy
   has_many :decks, through: :deck_cards
+
+  validates :name, :description, :strength, presence: true
+  validates :strength, numericality: { greater_than_or_equal_to: 0 }
 end

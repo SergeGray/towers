@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :card do
-    name { Faker::Lorem.word }
-    description { Faker::Lorem.sentence }
+    name { FFaker::Lorem.word }
+    description { FFaker::Lorem.sentence }
     action { :defense }
     rarity { :common }
     faction { :neutral }
