@@ -15,13 +15,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_145845) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "cards", force: :cascade do |t|
+    t.integer "action", default: 0, null: false
     t.datetime "created_at", null: false
     t.text "description", null: false
     t.integer "faction", default: 0, null: false
     t.string "name", null: false
     t.integer "rarity", default: 0, null: false
     t.integer "strength", default: 0, null: false
-    t.integer "type", default: 0, null: false
     t.datetime "updated_at", null: false
   end
 end

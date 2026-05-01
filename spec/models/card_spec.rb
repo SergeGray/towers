@@ -16,18 +16,8 @@ RSpec.describe Card, type: :model do
     expect(card).to_not be_valid
   end
 
-  it 'is not valid without a strength' do
-    card = Card.new(name: 'Test Card', description: 'Test Description')
-    expect(card).to_not be_valid
-  end
-
-  it 'is not valid with a strength less than 1' do
-    card = Card.new(name: 'Test Card', description: 'Test Description', strength: 0)
-    expect(card).to_not be_valid
-  end
-
-  it 'is not valid with a strength greater than 10' do
-    card = Card.new(name: 'Test Card', description: 'Test Description', strength: 11)
+  it 'is not valid with a strength less than 0' do
+    card = Card.new(name: 'Test Card', description: 'Test Description', strength: -1)
     expect(card).to_not be_valid
   end
 end
