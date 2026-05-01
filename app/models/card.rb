@@ -11,4 +11,7 @@ class Card < ApplicationRecord
 
   validates :name, :description, :strength, presence: true
   validates :strength, numericality: { greater_than_or_equal_to: 0 }
+
+  has_many :deck_cards, dependent: :destroy
+  has_many :decks, through: :deck_cards
 end
