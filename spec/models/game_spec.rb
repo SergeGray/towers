@@ -6,4 +6,5 @@ RSpec.describe Game, type: :model do
                                                          finished: 2) }
 
   it { is_expected.to have_many(:players).dependent(:destroy) }
+  it { is_expected.to have_one(:board).dependent(:destroy) }
 end
