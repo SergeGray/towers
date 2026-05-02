@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
+  it { is_expected.to define_enum_for(:action).with_values(defense: 0,
+                                                           offense: 1,
+                                                           special: 2) }
+  it { is_expected.to define_enum_for(:rarity).with_values(common: 0,
+                                                           rare: 1,
+                                                           effect: 2,
+                                                           unique: 3) }
+
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:description) }
   it { is_expected.to validate_presence_of(:strength) }
