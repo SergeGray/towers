@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_02_174021) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_175040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "board_rows", force: :cascade do |t|
+    t.bigint "board_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "position", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_board_rows_on_board_id"
+  end
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -104,6 +112,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_174021) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "board_rows", "boards"
   add_foreign_key "boards", "games"
   add_foreign_key "card_factions", "cards"
   add_foreign_key "card_factions", "factions"
