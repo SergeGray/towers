@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_02_175040) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_180127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,6 +67,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_175040) do
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 
+  create_table "discard_piles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_discard_piles_on_player_id"
+  end
+
   create_table "factions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -80,6 +87,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_175040) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "hands", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_hands_on_player_id"
+  end
+
   create_table "play_cards", force: :cascade do |t|
     t.bigint "card_id", null: false
     t.datetime "created_at", null: false
@@ -87,6 +101,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_175040) do
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_play_cards_on_card_id"
     t.index ["player_id"], name: "index_play_cards_on_player_id"
+  end
+
+  create_table "play_decks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_play_decks_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -119,8 +140,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_175040) do
   add_foreign_key "deck_cards", "cards"
   add_foreign_key "deck_cards", "decks"
   add_foreign_key "decks", "users"
+  add_foreign_key "discard_piles", "players"
+  add_foreign_key "hands", "players"
   add_foreign_key "play_cards", "cards"
   add_foreign_key "play_cards", "players"
+  add_foreign_key "play_decks", "players"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
 end
