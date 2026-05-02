@@ -4,7 +4,6 @@ FactoryBot.define do
     description { FFaker::Lorem.sentence }
     action { :defense }
     rarity { :common }
-    faction { :neutral }
     strength { 5 }
   end
 end

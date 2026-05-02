@@ -1,13 +1,9 @@
 class Card < ApplicationRecord
   enum :action, { defense: 0, offense: 1, special: 2 }
   enum :rarity, { common: 0, rare: 1, effect: 2, unique: 3 }
-  enum :faction, { neutral: 0,
-                   militia: 1,
-                   mc_club: 2,
-                   leadership: 3,
-                   chrome: 4,
-                   merchants_guild: 5,
-                   pirates: 6 }
+
+  has_many :card_factions, dependent: :destroy
+  has_many :factions, through: :card_factions
 
   has_many :deck_cards, dependent: :destroy
   has_many :decks, through: :deck_cards
