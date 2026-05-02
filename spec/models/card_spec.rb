@@ -18,4 +18,5 @@ RSpec.describe Card, type: :model do
   it { is_expected.to have_many(:factions).through(:card_factions) }
   it { is_expected.to have_many(:deck_cards).dependent(:destroy) }
   it { is_expected.to have_many(:decks).through(:deck_cards) }
+  it { is_expected.to have_many(:play_cards).dependent(:destroy) }
 end
