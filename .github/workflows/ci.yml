@@ -78,6 +78,7 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/towers_test
+      POSTGRES_HOST_AUTH_METHOD: trust
 
     # services:
     #  redis:
