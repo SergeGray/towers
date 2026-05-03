@@ -8,6 +8,8 @@ class Card < ApplicationRecord
   has_many :deck_cards, dependent: :destroy
   has_many :decks, through: :deck_cards
 
+  has_many :play_cards, dependent: :destroy
+
   validates :name, :description, :strength, presence: true
   validates :strength, numericality: { greater_than_or_equal_to: 0 }
 end

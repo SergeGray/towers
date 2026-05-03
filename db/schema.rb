@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_02_134715) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_180652) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "board_rows", force: :cascade do |t|
+    t.bigint "board_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "position", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_board_rows_on_board_id"
+  end
+
+  create_table "boards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "game_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_boards_on_game_id"
+  end
 
   create_table "card_factions", force: :cascade do |t|
     t.bigint "card_id", null: false
@@ -52,10 +67,60 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_134715) do
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 
+  create_table "discard_piles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_discard_piles_on_player_id"
+  end
+
   create_table "factions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "first_player_turn", default: true, null: false
+    t.integer "state", default: 0, null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hands", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_hands_on_player_id"
+  end
+
+  create_table "play_cards", force: :cascade do |t|
+    t.bigint "card_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "placeable_id"
+    t.string "placeable_type"
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_play_cards_on_card_id"
+    t.index ["placeable_type", "placeable_id"], name: "index_play_cards_on_placeable"
+    t.index ["player_id"], name: "index_play_cards_on_player_id"
+  end
+
+  create_table "play_decks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_play_decks_on_player_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "first_player", default: true, null: false
+    t.bigint "game_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["game_id"], name: "index_players_on_game_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,9 +136,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_02_134715) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "board_rows", "boards"
+  add_foreign_key "boards", "games"
   add_foreign_key "card_factions", "cards"
   add_foreign_key "card_factions", "factions"
   add_foreign_key "deck_cards", "cards"
   add_foreign_key "deck_cards", "decks"
   add_foreign_key "decks", "users"
+  add_foreign_key "discard_piles", "players"
+  add_foreign_key "hands", "players"
+  add_foreign_key "play_cards", "cards"
+  add_foreign_key "play_cards", "players"
+  add_foreign_key "play_decks", "players"
+  add_foreign_key "players", "games"
+  add_foreign_key "players", "users"
 end
