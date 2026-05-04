@@ -15,4 +15,5 @@ Rails.application.routes.draw do
 
   resources :decks
   resources :games, only: %i[index show new create]
+  resources :cards
 end
