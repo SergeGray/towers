@@ -14,6 +14,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
+    @card.factions = Faction.where(id: faction_ids)
     if @card.save
       redirect_to @card, notice: "Card created successfully"
     else
@@ -24,6 +25,7 @@ class CardsController < ApplicationController
   def edit; end
 
   def update
+    @card.factions = Faction.where(id: faction_ids)
     if @card.update(card_params)
       redirect_to @card, notice: "Card updated successfully"
     else
@@ -43,6 +45,10 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:name, :description, :action, :rarity, :strength, factions: [])
+    params.require(:card).permit(:name, :description, :action, :rarity, :strength)
+  end
+
+  def faction_ids
+    params[:card][:factions].reject(&:blank?).map(&:to_i)
   end
 end

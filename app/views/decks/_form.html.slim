@@ -13,6 +13,6 @@
           .col-6
             = f.select :cards, \
                        Card.all.map { |card| [card.name, card.id] }, \
-                       { multiple: true, include_blank: true }, \
+                       { multiple: true, prompt: "Select cards" }, \
                        { class: "form-control" }
         = f.submit "Save", class: "btn btn-primary form-control"

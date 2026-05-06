@@ -1,0 +1,13 @@
+.card.w-25
+  .card-body
+    h5.card-title = deck.name
+    .container.card-details
+      .row.mb-1
+        .col-6 Card count:
+        .col-6 = deck.cards.count
+      .row.mb-1.mt-3.justify-content-center
+        .col-6 = link_to "View", deck_path(deck), class: "btn btn-primary w-100"
+      .row.mb-1.justify-content-center
+        .col-6 = link_to "Edit", edit_deck_path(deck), class: "btn btn-primary w-100"
+      .row.mb-1.justify-content-center
+        .col-6 = link_to "Delete", deck_path(deck), class: "btn btn-primary w-100", method: :Delete

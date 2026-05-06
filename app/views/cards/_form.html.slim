@@ -39,6 +39,6 @@
           .col-6
             = f.select :factions, \
                        Faction.all.map { |faction| [faction.name, faction.id] }, \
-                       { multiple: true, include_blank: true }, \
+                       { multiple: true, include_blank: true, prompt: "Neutral" }, \
                        { class: "form-control" }
         = f.submit "Save", class: "btn btn-primary form-control"

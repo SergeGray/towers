@@ -1,4 +1,4 @@
 .m-3 
   .d-flex.flex-row.flex-wrap.gap-2
     - @deck.cards.each do |card|
-      = render "cards/card", card: card
+      = render "cards/card", card: card, hide_buttons: true
