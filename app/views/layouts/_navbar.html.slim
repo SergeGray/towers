@@ -15,7 +15,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         - if user_signed_in?
           .dropdown-toggle data-bs-toggle="dropdown" aria-expanded="false"
             = current_user.email
-          ul.dropdown-menu
+          ul.dropdown-menu.dropdown-menu-end
             li
               = link_to "Decks", decks_path, class: "dropdown-item"
             li
