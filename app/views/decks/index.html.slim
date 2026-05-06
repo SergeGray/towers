@@ -1,0 +1,7 @@
+.container.m-3
+  .d-flex.flex-row.flex-wrap.gap-2
+    - @decks.each do |deck|
+      = render "deck", deck: deck
+    .card.w-25
+      .card-body
+        h5.card-title = link_to "New Deck", new_deck_path, class: "btn btn-primary"
