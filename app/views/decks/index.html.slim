@@ -4,4 +4,6 @@
       = render "deck", deck: deck
     .card.w-25
       .card-body
-        h5.card-title = link_to "New Deck", new_deck_path, class: "btn btn-primary"
+        .row.mb-1.justify-content-center
+          .col-6
+            = link_to "New Deck", new_deck_path, class: "btn btn-primary w-100"
