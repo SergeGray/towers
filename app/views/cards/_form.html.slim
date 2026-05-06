@@ -1,0 +1,44 @@
+.m-3
+  = form_with model: card do |f|
+    .card.w-25
+      .card-body
+        .form-group.row.mb-3
+          .col-6
+            = f.label :name
+          .col-6
+            = f.text_field :name, class: "form-control"
+        .form-group.row.mb-3
+          .col-6
+            = f.label :description
+          .col-6
+            = f.text_area :description, class: "form-control"
+        .form-group.row.mb-3
+          .col-6
+            = f.label :action
+          .col-6
+            = f.select :action, \
+                       Card.actions.keys.map { |key| [key.humanize, key] }, \
+                       { include_blank: true }, \
+                       { class: "form-control" }
+        .form-group.row.mb-3
+          .col-6
+            = f.label :rarity
+          .col-6
+            = f.select :rarity, \
+                       Card.rarities.keys.map { |key| [key.humanize, key] }, \
+                       { include_blank: true }, \
+                       { class: "form-control" }
+        .form-group.row.mb-3
+          .col-6
+            = f.label :strength
+          .col-6
+            = f.number_field :strength, class: "form-control"
+        .form-group.row.mb-3
+          .col-6
+            = f.label :factions
+          .col-6
+            = f.select :factions, \
+                       Faction.all.map { |faction| [faction.name, faction.id] }, \
+                       { multiple: true, include_blank: true }, \
+                       { class: "form-control" }
+        = f.submit "Save", class: "btn btn-primary form-control"

@@ -43,6 +43,6 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:name, :description, :action, :rarity, :strength)
+    params.require(:card).permit(:name, :description, :action, :rarity, :strength, factions: [])
   end
 end

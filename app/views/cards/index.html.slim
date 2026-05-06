@@ -1,0 +1,8 @@
+.m-3
+  .d-flex.flex-row.flex-wrap.gap-2
+    - @cards.each do |card|
+      = render "card", card: card
+    - if user_signed_in? # TODO: Admin only
+      .card.w-25
+        .card-body
+          h5.card-title = link_to "New Card", new_card_path, class: "btn btn-primary"
