@@ -2,7 +2,7 @@
   .card-body
     h5.card-title = faction.name
     .container.card-details
-      - if user_signed_in? # TODO: Admin only
+      - if admin_signed_in?
         .row.mb-1.mt-3.justify-content-center
           .col-6 = link_to "Cards", faction_path(faction), class: "btn btn-primary w-100"
         .row.mb-1.justify-content-center

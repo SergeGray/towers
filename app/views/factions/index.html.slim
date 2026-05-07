@@ -1,7 +1,7 @@
 .d-flex.flex-row.flex-wrap.gap-2.m-3
   - @factions.each do |faction|
     = render "faction", faction: faction
-  - if user_signed_in? # TODO: Admin only
+  - if admin_signed_in?
     .card.w-25
       .card-body
         .row.mb-1.justify-content-center
