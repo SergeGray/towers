@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Factions", type: :request do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, admin: true) }
 
   describe "GET /index" do
     it "returns a success response" do
@@ -30,6 +31,15 @@ RSpec.describe "Factions", type: :request do
     context "when the user is signed in" do
       before { sign_in user }
 
+      it "redirects to root path" do
+        get new_faction_path
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
+
       it "returns a success response" do
         get new_faction_path
         expect(response).to be_successful
@@ -47,6 +57,15 @@ RSpec.describe "Factions", type: :request do
 
     context "when the user is signed in" do
       before { sign_in user }
+
+      it "redirects to root path" do
+        post factions_path, params: { faction: { name: "Test Faction" } }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
 
       it "creates a new faction" do
         post factions_path, params: { faction: { name: "Test Faction" } }
@@ -68,6 +87,15 @@ RSpec.describe "Factions", type: :request do
     context "when the user is signed in" do
       before { sign_in user }
 
+      it "redirects to root path" do
+        get edit_faction_path(faction)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
+
       it "returns a success response" do
         get edit_faction_path(faction)
         expect(response).to be_successful
@@ -88,6 +116,15 @@ RSpec.describe "Factions", type: :request do
     context "when the user is signed in" do
       before { sign_in user }
 
+      it "redirects to root path" do
+        patch faction_path(faction), params: { faction: { name: "Test Faction" } }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
+
       it "updates the faction" do
         patch faction_path(faction), params: { faction: { name: "Test Faction" } }
         expect(response).to redirect_to faction_path(faction)
@@ -107,6 +144,15 @@ RSpec.describe "Factions", type: :request do
 
     context "when the user is signed in" do
       before { sign_in user }
+
+      it "redirects to root path" do
+        delete faction_path(faction)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
 
       it "deletes the faction" do
         delete faction_path(faction)

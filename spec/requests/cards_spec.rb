@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Cards", type: :request do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, admin: true) }
 
   describe "GET /index" do
     it "returns a success response" do
@@ -30,6 +31,15 @@ RSpec.describe "Cards", type: :request do
     context "when the user is signed in" do
       before { sign_in user }
 
+      it "redirects to root path" do
+        get new_card_path
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
+
       it "returns a success response" do
         get new_card_path
         expect(response).to be_successful
@@ -47,6 +57,15 @@ RSpec.describe "Cards", type: :request do
 
     context "when the user is signed in" do
       before { sign_in user }
+
+      it "redirects to root path" do
+        post cards_path, params: { card: { name: "Test Card", description: "Test Description", action: :defense, rarity: :common, strength: 5 } }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
 
       it "creates a new card" do
         post cards_path, params: { card: { name: "Test Card", description: "Test Description", action: :defense, rarity: :common, strength: 5 } }
@@ -68,6 +87,15 @@ RSpec.describe "Cards", type: :request do
     context "when the user is signed in" do
       before { sign_in user }
 
+      it "redirects to root path" do
+        get edit_card_path(card)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
+
       it "returns a success response" do
         get edit_card_path(card)
         expect(response).to be_successful
@@ -88,6 +116,15 @@ RSpec.describe "Cards", type: :request do
     context "when the user is signed in" do
       before { sign_in user }
 
+      it "redirects to root path" do
+        patch card_path(card), params: { card: { name: "Test Card", description: "Test Description", action: :defense, rarity: :common, strength: 5 } }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
+
       it "updates the card" do
         patch card_path(card), params: { card: { name: "Test Card", description: "Test Description", action: :defense, rarity: :common, strength: 5 } }
         expect(response).to redirect_to card_path(card)
@@ -107,6 +144,15 @@ RSpec.describe "Cards", type: :request do
 
     context "when the user is signed in" do
       before { sign_in user }
+
+      it "redirects to root path" do
+        delete card_path(card)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when the admin is signed in" do
+      before { sign_in admin }
 
       it "deletes the card" do
         delete card_path(card)

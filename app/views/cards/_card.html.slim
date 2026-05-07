@@ -21,7 +21,7 @@
             = card.factions.map(&:name).join(", ")
           - else
             | Neutral
-      - if user_signed_in? && !hide_buttons # TODO: Admin only
+      - if admin_signed_in? && !hide_buttons
         .row.mb-1.mt-3.justify-content-center
           .col-6 = link_to "Edit", edit_card_path(card), class: "btn btn-primary w-100"
         .row.mb-1.justify-content-center

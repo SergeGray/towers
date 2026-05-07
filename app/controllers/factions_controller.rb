@@ -1,6 +1,6 @@
 class FactionsController < ApplicationController
   before_action :set_faction, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new create edit update destroy] # TODO: Admin only
+  before_action :authenticate_admin!, only: %i[new create edit update destroy]
 
   def index
     @factions = Faction.all
