@@ -14,7 +14,7 @@ class FactionsController < ApplicationController
 
   def create
     @faction = Faction.new(faction_params)
-    @faction.cards = Card.where(id: card_ids)
+    @faction.cards = Card.where(id: card_ids) if card_ids.present?
     if @faction.save
       redirect_to @faction, notice: "Faction created successfully"
     else
@@ -25,7 +25,7 @@ class FactionsController < ApplicationController
   def edit; end
 
   def update
-    @faction.cards = Card.where(id: card_ids)
+    @faction.cards = Card.where(id: card_ids) if card_ids.present?
     if @faction.update(faction_params)
       redirect_to @faction, notice: "Faction updated successfully"
     else
@@ -49,6 +49,6 @@ class FactionsController < ApplicationController
   end
 
   def card_ids
-    params[:faction][:cards].reject(&:blank?).map(&:to_i)
+    params[:faction][:cards]&.reject(&:blank?)&.map(&:to_i)
   end
 end
