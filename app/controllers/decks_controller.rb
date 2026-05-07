@@ -14,6 +14,7 @@ class DecksController < ApplicationController
 
   def create
     @deck = current_user.decks.new(deck_params)
+    @deck.cards = Card.where(id: card_ids) if card_ids.present?
     if @deck.save
       redirect_to @deck, notice: "Deck created successfully"
     else
@@ -24,6 +25,7 @@ class DecksController < ApplicationController
   def edit; end
 
   def update
+    @deck.cards = Card.where(id: card_ids) if card_ids.present?
     if @deck.update(deck_params)
       redirect_to @deck, notice: "Deck updated successfully"
     else
@@ -44,5 +46,9 @@ class DecksController < ApplicationController
 
   def set_deck
     @deck = current_user.decks.find(params[:id])
+  end
+
+  def card_ids
+    params[:deck][:cards]&.reject(&:blank?)&.map(&:to_i)
   end
 end

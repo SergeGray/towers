@@ -1,0 +1,23 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    a.navbar-brand href="#" Towers
+    button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.me-auto
+        li.nav-item
+          = link_to "Games", games_path, class: "nav-link"
+        li.nav-item
+          = link_to "Cards", cards_path, class: "nav-link"
+        li.nav-item
+          = link_to "Factions", factions_path, class: "nav-link"
+      .d-flex
+        - if user_signed_in?
+          .dropdown-toggle data-bs-toggle="dropdown" aria-expanded="false"
+            = current_user.email
+          ul.dropdown-menu.dropdown-menu-end
+            li = link_to "Decks", decks_path, class: "dropdown-item"
+            li = link_to "Edit profile", edit_user_registration_path, class: "dropdown-item"
+            li = button_to "Log out", destroy_user_session_path, class: "dropdown-item", method: :delete
+        - else
+          = link_to "Sign in", new_user_session_path, class: "btn btn-primary"

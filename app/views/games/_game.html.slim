@@ -1,0 +1,13 @@
+ruby: 
+  player_1 = game.players.first.user.name
+  player_2 = game.players.second.user.name
+
+.card.w-25
+  .card-body
+    h5.card-title = "#{player_1} vs #{player_2}"
+    .container.card-details
+      .row.mb-1
+        .col-6 State:
+        .col-6 = game.state.humanize
+      .row.mb-1.mt-3.justify-content-center
+        .col-6 = link_to "Show Game", game_path(game), class: "btn btn-primary w-100"

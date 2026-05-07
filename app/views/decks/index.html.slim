@@ -1,0 +1,8 @@
+.d-flex.flex-row.flex-wrap.gap-2.m-3
+  - @decks.each do |deck|
+    = render "deck", deck: deck
+  .card.w-25
+    .card-body
+      .row.mb-1.justify-content-center
+        .col-6
+          = link_to "New Deck", new_deck_path, class: "btn btn-primary w-100"

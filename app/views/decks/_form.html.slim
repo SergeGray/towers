@@ -1,0 +1,18 @@
+.m-3
+  = form_with model: deck do |f|
+    .card.w-25
+      .card-body
+        .form-group.row.mb-3
+          .col-6
+            = f.label :name
+          .col-6
+            = f.text_field :name, class: "form-control"
+        .form-group.row.mb-3
+          .col-6
+            = f.label :cards
+          .col-6
+            = f.select :cards, \
+                       Card.all.map { |card| [card.name, card.id] }, \
+                       { multiple: true, prompt: "Select cards" }, \
+                       { class: "form-control" }
+        = f.submit "Save", class: "btn btn-primary form-control"
