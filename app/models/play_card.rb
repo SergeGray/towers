@@ -8,6 +8,6 @@ class PlayCard < ApplicationRecord
   private
 
   def before_validation_add_to_deck
-    self.placeable ||= player.play_deck
+    self.placeable ||= player&.play_deck
   end
 end

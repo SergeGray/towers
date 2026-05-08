@@ -8,6 +8,6 @@ class Board < ApplicationRecord
   private
 
   def after_create_add_board_rows
-    5.times { |i| board_rows.create!(position: i) }
+    Game::NUMBER_OF_ROWS.times { |i| board_rows.create!(position: i) }
   end
 end
