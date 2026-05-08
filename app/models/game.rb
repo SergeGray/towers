@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  MINIMUM_CARDS_PER_DECK = 30
+
   enum :state, { pending: 0, in_progress: 1, finished: 2 }
 
   has_many :players, dependent: :destroy
