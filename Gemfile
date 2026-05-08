@@ -41,6 +41,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 gem "devise"
+gem "dry-monads"
 gem "slim-rails"
 
 group :development, :test do
