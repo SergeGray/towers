@@ -7,4 +7,12 @@ RSpec.describe Game, type: :model do
 
   it { is_expected.to have_many(:players).dependent(:destroy) }
   it { is_expected.to have_one(:board).dependent(:destroy) }
+
+  describe "callbacks" do
+    it "creates a board on game creation" do
+      game = build(:game)
+      expect { game.save }.to change(Board, :count).by(1)
+      expect(game.board).to be_persisted
+    end
+  end
 end
