@@ -5,6 +5,9 @@ RSpec.describe BoardRow, type: :model do
 
   it { is_expected.to belong_to(:board) }
   it { is_expected.to have_many(:play_cards).dependent(:destroy) }
+  it { is_expected.to have_many(:starting_game_turns).dependent(:destroy).class_name('GameTurn') }
+  it { is_expected.to have_many(:reaching_game_turns).dependent(:destroy).class_name('GameTurn') }
+  it { is_expected.to have_many(:targeting_game_turns).dependent(:destroy).class_name('GameTurn') }
 
   it { is_expected.to validate_presence_of(:position) }
   it { is_expected.to validate_uniqueness_of(:position).scoped_to(:board_id) }

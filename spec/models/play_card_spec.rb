@@ -5,6 +5,7 @@ RSpec.describe PlayCard, type: :model do
 
   it { is_expected.to belong_to(:player) }
   it { is_expected.to belong_to(:card) }
+  it { is_expected.to have_many(:targeting_game_turns).dependent(:destroy).class_name('GameTurn') }
 
   describe "callbacks" do
     it "places card in the play deck if it has no placeable" do

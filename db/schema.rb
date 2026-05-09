@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_133953) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_09_150227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -80,6 +80,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_133953) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "game_turns", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "destinationable_id"
+    t.string "destinationable_type"
+    t.bigint "game_id", null: false
+    t.bigint "originable_id"
+    t.string "originable_type"
+    t.bigint "player_id", null: false
+    t.bigint "targetable_id"
+    t.string "targetable_type"
+    t.datetime "updated_at", null: false
+    t.index ["destinationable_type", "destinationable_id"], name: "index_game_turns_on_destinationable"
+    t.index ["game_id"], name: "index_game_turns_on_game_id"
+    t.index ["originable_type", "originable_id"], name: "index_game_turns_on_originable"
+    t.index ["player_id"], name: "index_game_turns_on_player_id"
+    t.index ["targetable_type", "targetable_id"], name: "index_game_turns_on_targetable"
+  end
+
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.boolean "first_player_turn", default: true, null: false
@@ -145,6 +163,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_133953) do
   add_foreign_key "deck_cards", "decks"
   add_foreign_key "decks", "users"
   add_foreign_key "discard_piles", "players"
+  add_foreign_key "game_turns", "games"
+  add_foreign_key "game_turns", "players"
   add_foreign_key "hands", "players"
   add_foreign_key "play_cards", "cards"
   add_foreign_key "play_cards", "players"
