@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   MINIMUM_CARDS_PER_DECK = 30
   NUMBER_OF_ROWS = 5
+  CARDS_IN_ROW = 30
 
   enum :state, { pending: 0, in_progress: 1, finished: 2 }
 
